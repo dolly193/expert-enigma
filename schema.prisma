@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  password  String // Armazenaremos o hash da senha, não a senha em texto plano
+  role      Role     @default(CUSTOMER)
+  emailVerified           DateTime? // Data de quando o email foi verificado
+  emailVerificationToken  String?   @unique // Token único para verificação
+  orders    Order[]
+  reviews   Review[]
+  products  Product[] // Produtos que este usuário criou (se for um admin/vendedor)
+  messages  Message[] // Mensagens que este usuário enviou
+  createdAt DateTime @default(now())
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  imageUrl    String
+  category    String
+  seller      User        @relation(fields: [sellerId], references: [id])
+  sellerId    String
+  orderItems  OrderItem[]
+  reviews     Review[]
+  createdAt   DateTime    @default(now())
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    String
+  total     Float
+  status    String      @default("PENDING") // Ex: PENDING, PAID, SHIPPED, DELIVERED, CANCELED
+  txid      String?     @unique // ID da transação da Efí para verificação
+  items     OrderItem[]
+  messages  Message[]
+  createdAt DateTime    @default(now())
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String
+  sender    User     @relation(fields: [senderId], references: [id])
+  senderId  String
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  rating    Int // Ex: 1 a 5
+  comment   String?
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,421 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --background-color: #1a1a1d;
+    --surface-color: #2c2c2e;
+    --primary-color: #8e44ad; /* Roxo vibrante */
+    --primary-hover-color: #9b59b6;
+    --text-color: #f5f5f7;
+    --secondary-text-color: #a0a0a0;
+    --border-color: #444;
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+}
+
+/* Reset e Padrões Globais */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #121212;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 30px 30px;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-hover-color);
+}
+
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 2rem auto;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: var(--text-color);
+    text-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
+}
+
+/* Cabeçalho e Navegação */
+header {
+    background-color: var(--surface-color);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto; 
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+#nav-links span {
+    margin-right: 15px;
+    color: var(--secondary-text-color);
+}
+
+#nav-links a, #nav-links button {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem; 
+    font-family: 'Poppins', sans-serif;
+    transition: color 0.3s ease;
+}
+
+#nav-links a:hover, #nav-links button:hover {
+    color: var(--primary-color);
+}
+
+/* Grid de Produtos */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.product-card {
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.product-card-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; 
+}
+
+.product-card-content h3 {
+    margin-top: 0;
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+.product-card-content .price {
+    color: var(--success-color);
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.product-card-actions {
+    padding: 0 15px 15px;
+}
+
+.product-card-actions button, form button {
+    width: 100%;
+    padding: 12px;
+    background-image: linear-gradient(45deg, var(--primary-color), var(--primary-hover-color));
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    background-size: 150% auto;
+}
+
+.product-card-actions button:hover, form button:hover {
+    background-position: right center;
+    box-shadow: 0 0 20px var(--primary-color);
+}
+
+/* Formulários de Autenticação e Admin */
+.auth-container, #product-management {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background: var(--surface-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input, form textarea, form button {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+}
+
+form input:focus, form textarea:focus {
+    outline: none;
+    border-color: var(--primary-hover-color);
+    box-shadow: 0 0 10px var(--primary-color);
+}
+
+.error { color: var(--error-color); text-align: center; margin-top: 10px; }
+.message { color: var(--success-color); text-align: center; margin-top: 10px; }
+
+/* Estilos para a página de Pedidos */
+.order-item {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.order-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.order-item p {
+    margin-bottom: 5px;
+}
+
+.order-item ul {
+    list-style-type: none;
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 2px solid var(--primary-color);
+}
+
+.order-item li {
+    color: var(--secondary-text-color);
+}
+
+.order-actions {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.order-actions .deliver-btn {
+    background-image: linear-gradient(45deg, var(--success-color), #28b463);
+}
+
+.order-actions .deliver-btn:hover {
+    box-shadow: 0 0 20px var(--success-color);
+}
+
+/* Estilos do Modal */
+.modal {
+    display: none; /* Alterado por JS */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--surface-color);
+    padding: 30px;
+    border: 1px solid var(--border-color);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+.close-button {
+    color: var(--secondary-text-color);
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--text-color);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+/* Estilos para a Página de Chat */
+.chat-container {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    height: 60vh;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.chat-message {
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-message.sent {
+    background-color: var(--primary-color);
+    color: white;
+    align-self: flex-end;
+    border-bottom-right-radius: 3px;
+}
+
+.chat-message.received {
+    background-color: var(--surface-color);
+    align-self: flex-start;
+    border-bottom-left-radius: 3px;
+}
+
+.message-sender {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--secondary-text-color);
+}
+
+.chat-message.sent .message-sender {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.message-content {
+    font-size: 1rem;
+}
+
+.message-time {
+    font-size: 0.7rem;
+    align-self: flex-end;
+    margin-top: 5px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.chat-form {
+    display: flex;
+    gap: 10px;
+}
+
+/* Estilos para o Modal de Compra PIX */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.quantity-selector input {
+    width: 60px;
+    text-align: center;
+}
+
+#confirm-purchase-btn {
+    width: 100%;
+}
+
+.feedback-message {
+    text-align: center;
+    margin-top: 15px;
+    font-weight: 600;
+}
+
+.pix-qrcode {
+    display: block;
+    margin: 15px auto;
+    max-width: 250px;
+    border: 5px solid white;
+    border-radius: 8px;
+}
+
+.pix-copy-paste {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.pix-copy-paste input {
+    flex-grow: 1;
+    background-color: var(--background-color);
+    color: var(--secondary-text-color);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+}
